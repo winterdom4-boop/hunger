@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sims 2 Hunger Bar Timer</title>
-    <!-- Imports the authentic Sims 2 interface font family -->
     <link rel="stylesheet" href="https://cdnfonts.com">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,9 +12,14 @@
     <!-- The Sims 2 Needs Panel Interface -->
     <div id="ui-panel" class="needs-panel">
         
-        <!-- Spinning Sims Plumbob Logo Diamond -->
+        <!-- Enhanced 3D-Shaded Spinning Plumbob -->
         <div class="plumbob-container">
-            <div id="plumbob" class="plumbob-diamond"></div>
+            <div id="plumbob" class="plumbob-diamond spinning paused">
+                <div class="top-left"></div>
+                <div class="top-right"></div>
+                <div class="bottom-left"></div>
+                <div class="bottom-right"></div>
+            </div>
         </div>
 
         <div class="need-row">
@@ -37,7 +41,9 @@
         <h1 class="feast-text">Frenzied Feast</h1>
     </div>
 
-    <!-- Points to your uploaded local repository wav file -->
+    <!-- Hidden Test Button (Blends into background) -->
+    <button id="secret-test-btn" onclick="triggerSecretTest()">Test</button>
+
     <audio id="alarm-sound" src="alarm.wav" preload="auto" loop></audio>
 
 </body>
