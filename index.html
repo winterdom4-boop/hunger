@@ -9,23 +9,17 @@
 </head>
 <body id="app-body">
 
-    <!-- The Sims 2 Needs Panel Interface -->
+    <!-- The Sims 2 Needs Panel Interface (Stays visible) -->
     <div id="ui-panel" class="needs-panel">
         
-        <!-- Enhanced Real 3D Plumbob Diamond Structure -->
+        <!-- Original Flat 2D Spinning Plumbob -->
         <div class="plumbob-container">
-            <div id="plumbob" class="plumbob-diamond spinning paused">
-                <!-- Front Facets -->
-                <div class="top-left face-front"></div>
-                <div class="top-right face-front"></div>
-                <div class="bottom-left face-front"></div>
-                <div class="bottom-right face-front"></div>
-                <!-- Back Facets (Provides the thickness at 90 degrees) -->
-                <div class="top-left face-back"></div>
-                <div class="top-right face-back"></div>
-                <div class="bottom-left face-back"></div>
-                <div class="bottom-right face-back"></div>
-            </div>
+            <div id="plumbob" class="plumbob-diamond spinning paused"></div>
+        </div>
+
+        <!-- Dynamic Game Over Announcement Container -->
+        <div id="frenzied-feast-screen" class="hidden">
+            <h1 class="feast-text">Frenzied Feast</h1>
         </div>
 
         <div class="need-row">
@@ -40,11 +34,6 @@
             <button id="fed-btn" onclick="feedSim()">Fed</button>
             <button id="mute-btn" onclick="toggleMute()">Mute</button>
         </div>
-    </div>
-
-    <!-- Hidden Game Over Screen -->
-    <div id="frenzied-feast-screen" class="hidden">
-        <h1 class="feast-text">Frenzied Feast</h1>
     </div>
 
     <!-- Hidden Test Button Area -->
