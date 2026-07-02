@@ -6,6 +6,7 @@ let isMuted = false;
 const bodyElement = document.getElementById('app-body');
 const uiPanel = document.getElementById('ui-panel');
 const hungerBar = document.getElementById('hunger-bar');
+const plumbob = document.getElementById('plumbob');
 const playPauseBtn = document.getElementById('play-pause-btn');
 const feastScreen = document.getElementById('frenzied-feast-screen');
 const alarmSound = document.getElementById('alarm-sound');
@@ -14,10 +15,8 @@ function updateUI() {
     let percentage = (timeLeft / TOTAL_TIME) * 100;
     hungerBar.style.width = `${percentage}%`;
 
-    // Strip previous color classes
     hungerBar.className = "bar-fill";
 
-    // Dynamic Sims health bar color mapping
     if (percentage > 60) {
         hungerBar.classList.add("state-green");
     } else if (percentage > 35) {
@@ -31,8 +30,13 @@ function updateUI() {
 
 function toggleTimer() {
     if (timerId === null) {
-        // Start running from its current time state
+        // Start running down
         playPauseBtn.textContent = "Pause";
+        
+        // Plumbob spins when running
+        plumbob.classList.add("spinning");
+        plumbob.classList.remove("paused");
+
         timerId = setInterval(() => {
             if (timeLeft > 0) {
                 timeLeft--;
@@ -46,26 +50,29 @@ function toggleTimer() {
         clearInterval(timerId);
         timerId = null;
         playPauseBtn.textContent = "Play";
+        
+        // Freeze Plumbob rotation in place
+        plumbob.classList.add("paused");
     }
 }
 
 function feedSim() {
-    // Keep it running if it's already active, just reset parameters
     timeLeft = TOTAL_TIME;
     
-    // Clear any active game-over alarms just in case
     alarmSound.pause();
     alarmSound.currentTime = 0;
     bodyElement.style.backgroundColor = "#8fa1e0";
     uiPanel.classList.remove("hidden");
     feastScreen.classList.add("hidden");
     
-    // If the timer was paused when clicking "Fed", make sure it stays paused at max
-    // Otherwise, it keeps running seamlessly down from the top 
+    // Maintain animation continuity on clear states
     if (timerId === null) {
         playPauseBtn.textContent = "Play";
+        plumbob.classList.remove("spinning", "paused");
     } else {
         playPauseBtn.textContent = "Pause";
+        plumbob.classList.add("spinning");
+        plumbob.classList.remove("paused");
     }
     
     updateUI();
@@ -81,16 +88,17 @@ function triggerFeast() {
     clearInterval(timerId);
     timerId = null;
     playPauseBtn.textContent = "Play";
+    plumbob.classList.remove("spinning", "paused");
     
-    // Hide panel, transition background color to deep red, show textual alert
     uiPanel.classList.add("hidden");
     bodyElement.style.backgroundColor = "#660000"; 
     feastScreen.classList.remove("hidden");
 
     if (!isMuted) {
-        alarmSound.play().catch(error => console.log("Audio waiting for user click interaction."));
+        // Plays your newly uploaded alarm.wav file
+        alarmSound.play().catch(error => console.log("Audio waiting for explicit click context."));
     }
 }
 
-// Initialize the screen right away to 100% green bar, but do not start clock loop yet
+// Initial idle state mapping setup
 updateUI();
