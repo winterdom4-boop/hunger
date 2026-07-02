@@ -14,12 +14,11 @@
         
         <!-- Original Flat 2D Spinning Plumbob -->
         <div class="plumbob-container">
-            <div id="plumbob" class="plumbob-diamond spinning paused"></div>
+            <div id="plumbob-diamond" class="plumbob-diamond spinning paused"></div>
         </div>
 
         <!-- Dynamic Game Over Announcement Container -->
         <div id="frenzied-feast-screen" class="hidden">
-            <!-- Split into 2 lines using a break tag -->
             <h1 class="feast-text">Frenzied<br>Feast</h1>
         </div>
 
@@ -40,7 +39,6 @@
     <!-- Hidden Test Button Area -->
     <button id="secret-test-btn" onclick="triggerSecretTest()"><span>Test</span></button>
 
-    <!-- Removed the loop setting so the .wav only plays once -->
     <audio id="alarm-sound" src="alarm.wav" preload="auto"></audio>
 
 </body>
