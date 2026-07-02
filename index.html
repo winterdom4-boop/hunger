@@ -12,13 +12,19 @@
     <!-- The Sims 2 Needs Panel Interface -->
     <div id="ui-panel" class="needs-panel">
         
-        <!-- Enhanced 3D-Shaded Spinning Plumbob -->
+        <!-- Enhanced Real 3D Plumbob Diamond Structure -->
         <div class="plumbob-container">
             <div id="plumbob" class="plumbob-diamond spinning paused">
-                <div class="top-left"></div>
-                <div class="top-right"></div>
-                <div class="bottom-left"></div>
-                <div class="bottom-right"></div>
+                <!-- Front Facets -->
+                <div class="top-left face-front"></div>
+                <div class="top-right face-front"></div>
+                <div class="bottom-left face-front"></div>
+                <div class="bottom-right face-front"></div>
+                <!-- Back Facets (Provides the thickness at 90 degrees) -->
+                <div class="top-left face-back"></div>
+                <div class="top-right face-back"></div>
+                <div class="bottom-left face-back"></div>
+                <div class="bottom-right face-back"></div>
             </div>
         </div>
 
@@ -41,8 +47,8 @@
         <h1 class="feast-text">Frenzied Feast</h1>
     </div>
 
-    <!-- Hidden Test Button (Blends into background) -->
-    <button id="secret-test-btn" onclick="triggerSecretTest()">Test</button>
+    <!-- Hidden Test Button Area -->
+    <button id="secret-test-btn" onclick="triggerSecretTest()"><span>Test</span></button>
 
     <audio id="alarm-sound" src="alarm.wav" preload="auto" loop></audio>
 
