@@ -30,6 +30,7 @@ function updateUI() {
 
 function toggleTimer() {
     if (timerId === null) {
+        // Start running down
         playPauseBtn.textContent = "Pause";
         plumbob.classList.remove("paused");
 
@@ -42,6 +43,7 @@ function toggleTimer() {
             }
         }, 1000);
     } else {
+        // Pause active timer loop safely
         clearInterval(timerId);
         timerId = null;
         playPauseBtn.textContent = "Play";
@@ -76,12 +78,18 @@ function toggleMute() {
 }
 
 function triggerSecretTest() {
-    // Drop time to 3 seconds and force play state instantly
+    // 1. Force wipe any running interval loop right away
+    clearInterval(timerId);
+    timerId = null;
+    
+    // 2. Override time left variable instantly to 3 seconds
     timeLeft = 3;
+    
+    // 3. Render the updated red bar state immediately 
     updateUI();
-    if (timerId === null) {
-        toggleTimer();
-    }
+    
+    // 4. Fire up the execution loop cleanly from the 3-second remaining mark
+    toggleTimer();
 }
 
 function triggerFeast() {
@@ -95,9 +103,9 @@ function triggerFeast() {
     feastScreen.classList.remove("hidden");
 
     if (!isMuted) {
-        alarmSound.play().catch(error => console.log("Audio waiting for interaction."));
+        alarmSound.play().catch(error => console.log("Audio waiting for user context."));
     }
 }
 
-// Initial UI configuration launch
+// Initial UI setup mapping configuration
 updateUI();
