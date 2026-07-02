@@ -39,10 +39,10 @@ body {
     align-items: center;
     margin-bottom: 25px;
     height: 80px;
-    perspective: 400px; /* Gives 3D depth to the rotation */
+    perspective: 600px; /* Enhanced 3D perspective window */
 }
 
-/* 3D Multi-shaded Plumbob */
+/* True 3D Multi-shaded Plumbob Engine */
 .plumbob-diamond {
     position: relative;
     width: 40px;
@@ -50,11 +50,12 @@ body {
     transform-style: preserve-3d;
 }
 
-/* Shading pieces for 3D illusion */
+/* Shared facet geometry layout rules */
 .plumbob-diamond div {
     position: absolute;
     width: 0;
     height: 0;
+    backface-visibility: visible;
 }
 
 /* Top half facets */
@@ -85,9 +86,17 @@ body {
     bottom: 0;
 }
 
+/* 3D Depth Positioning Layers (Separates them along the Z axis) */
+.face-front {
+    transform: translateZ(5px);
+}
+.face-back {
+    transform: translateZ(-5px) rotateY(180deg);
+}
+
 /* Rotation engine classes */
 .spinning {
-    animation: spinPlumbob 2s linear infinite;
+    animation: spinPlumbob 2.5s linear infinite;
 }
 
 .paused {
@@ -95,9 +104,9 @@ body {
 }
 
 @keyframes spinPlumbob {
-    0% { transform: rotateY(0deg); filter: drop-shadow(0 0 4px rgba(92, 230, 92, 0.6)); }
-    50% { transform: rotateY(180deg); filter: drop-shadow(0 0 10px rgba(92, 230, 92, 0.9)); }
-    100% { transform: rotateY(360deg); filter: drop-shadow(0 0 4px rgba(92, 230, 92, 0.6)); }
+    0% { transform: rotateY(0deg); filter: drop-shadow(0 0 5px rgba(92, 230, 92, 0.5)); }
+    50% { transform: rotateY(180deg); filter: drop-shadow(0 0 12px rgba(92, 230, 92, 0.8)); }
+    100% { transform: rotateY(360deg); filter: drop-shadow(0 0 5px rgba(92, 230, 92, 0.5)); }
 }
 
 .need-row {
@@ -177,17 +186,25 @@ button {
     text-shadow: 4px 4px 0px #000000;
 }
 
-/* Secret Test Button: Invisible backdrop disguise */
+/* Secret Test Button Fix: Large invisible clickable footer strip */
 #secret-test-btn {
     position: absolute;
-    bottom: 40px;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 60px;
     background: transparent !important;
     border: none !important;
-    color: #8fa1e0 !important; /* Matches background exactly */
-    font-size: 0.8rem;
-    cursor: pointer;
     box-shadow: none !important;
     z-index: 10;
-    width: 60px;
-    padding: 10px;
+    cursor: pointer;
+}
+
+#secret-test-btn span {
+    color: #8fa1e0 !important; /* Perfect camouflage against background */
+    font-size: 0.7rem;
+    display: block;
+    text-align: center;
+    line-height: 60px;
+    opacity: 0.1; /* Barely visible hint layout so you can see it if looking hard */
 }
