@@ -6,9 +6,11 @@
 }
 
 body {
-    background-color: #8fa1e0 !important; /* Forces the iconic periwinkle blue */
-    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #8fa1e0 !important;
+    /* Applies the authentic Sims 2 UI font family */
+    font-family: 'ITC Benguiat Gothic', "Segoe UI", sans-serif;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -27,23 +29,67 @@ body {
     max-width: 400px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     text-align: center;
-    display: block !important;
+}
+
+/* Plumbob Placement Container */
+.plumbob-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    height: 70px;
+}
+
+/* Crafted pure CSS Sims Plumbob Diamond structure */
+.plumbob-diamond {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 35px solid #5ce65c;
+    position: relative;
+    filter: drop-shadow(0 0 8px rgba(92, 230, 92, 0.7));
+}
+
+.plumbob-diamond:after {
+    content: '';
+    position: absolute;
+    top: 35px;
+    left: -20px;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 35px solid #47b847;
+}
+
+/* Rotation Classes triggered by Javascript state */
+.spinning {
+    animation: spinPlumbob 2.5s linear infinite;
+}
+
+.paused {
+    animation-play-state: paused;
+}
+
+@keyframes spinPlumbob {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
 }
 
 .need-row {
     margin-bottom: 25px;
 }
 
-/* Dark Navy Text Style */
 .need-label {
     display: block;
     color: #1a2a60;
-    font-size: 1.6rem;
-    font-weight: bold;
+    font-size: 1.7rem;
+    font-weight: 700;
     margin-bottom: 12px;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.3);
 }
 
-/* Outer Grooved Track for the Bar */
 .bar-container {
     background-color: #404040;
     border: 2px solid #202020;
@@ -54,20 +100,18 @@ body {
     overflow: hidden;
 }
 
-/* Capsule Bar Fill */
 .bar-fill {
     height: 100%;
-    width: 100%; /* Spans 100% on start */
+    width: 100%;
     border-radius: 50px;
+    transition: width 1s linear;
 }
 
-/* Color States fallback */
 .state-green  { background: #009900 !important; }
 .state-yellow { background: #cccc00 !important; }
 .state-orange { background: #e65c00 !important; }
 .state-red    { background: #990000 !important; }
 
-/* Buttons */
 .control-panel {
     display: flex;
     justify-content: space-between;
@@ -79,14 +123,13 @@ button {
     background: #ffffff;
     border: 2px solid #5869a8;
     color: #1a2a60;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: bold;
     padding: 12px 0;
     border-radius: 12px;
     cursor: pointer;
 }
 
-/* End Game Hidden States */
 .hidden {
     display: none !important;
 }
