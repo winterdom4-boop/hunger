@@ -30,11 +30,7 @@ function updateUI() {
 
 function toggleTimer() {
     if (timerId === null) {
-        // Start running down
         playPauseBtn.textContent = "Pause";
-        
-        // Plumbob spins when running
-        plumbob.classList.add("spinning");
         plumbob.classList.remove("paused");
 
         timerId = setInterval(() => {
@@ -46,12 +42,9 @@ function toggleTimer() {
             }
         }, 1000);
     } else {
-        // Pause active timer loop safely
         clearInterval(timerId);
         timerId = null;
         playPauseBtn.textContent = "Play";
-        
-        // Freeze Plumbob rotation in place
         plumbob.classList.add("paused");
     }
 }
@@ -65,13 +58,11 @@ function feedSim() {
     uiPanel.classList.remove("hidden");
     feastScreen.classList.add("hidden");
     
-    // Maintain animation continuity on clear states
     if (timerId === null) {
         playPauseBtn.textContent = "Play";
-        plumbob.classList.remove("spinning", "paused");
+        plumbob.classList.add("paused");
     } else {
         playPauseBtn.textContent = "Pause";
-        plumbob.classList.add("spinning");
         plumbob.classList.remove("paused");
     }
     
@@ -84,21 +75,29 @@ function toggleMute() {
     document.getElementById('mute-btn').textContent = isMuted ? "Unmute" : "Mute";
 }
 
+function triggerSecretTest() {
+    // Drop time to 3 seconds and force play state instantly
+    timeLeft = 3;
+    updateUI();
+    if (timerId === null) {
+        toggleTimer();
+    }
+}
+
 function triggerFeast() {
     clearInterval(timerId);
     timerId = null;
     playPauseBtn.textContent = "Play";
-    plumbob.classList.remove("spinning", "paused");
+    plumbob.classList.add("paused");
     
     uiPanel.classList.add("hidden");
     bodyElement.style.backgroundColor = "#660000"; 
     feastScreen.classList.remove("hidden");
 
     if (!isMuted) {
-        // Plays your newly uploaded alarm.wav file
-        alarmSound.play().catch(error => console.log("Audio waiting for explicit click context."));
+        alarmSound.play().catch(error => console.log("Audio waiting for interaction."));
     }
 }
 
-// Initial idle state mapping setup
+// Initial UI configuration launch
 updateUI();
