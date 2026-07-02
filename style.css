@@ -192,64 +192,71 @@ button {
 }
 
 /* ==========================================================================
-   FIXED LANDSCAPE NAVIGATION RULES (Forced Center Overlay)
+   UPDATED LANDSCAPE RULES (Fixes the offset clickboxes)
    ========================================================================== */
 @media (orientation: landscape) and (max-height: 500px) {
+    body {
+        display: grid !important;
+        place-items: center !important;
+        height: 100vh !important;
+        width: 100vw !important;
+    }
+
     .needs-panel {
-        /* Bypasses flex alignment calculations entirely */
-        position: fixed !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
+        /* Reset positioning back to a natural flow layout */
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
         
-        /* Restores natural un-squished dimensional proportions */
-        padding: 25px 30px !important;
-        width: 85% !important;
-        max-width: 410px !important;
+        /* Layout dimensions */
+        padding: 20px 30px !important;
+        width: 95% !important;
+        max-width: 400px !important;
     }
 
     .plumbob-container {
-        margin-bottom: 12px !important;
-        height: 65px !important;
+        margin-bottom: 10px !important;
+        height: 55px !important;
     }
 
     .plumbob-diamond {
-        border-bottom-width: 32px !important;
-        border-left-width: 19px !important;
-        border-right-width: 19px !important;
+        border-bottom-width: 28px !important;
+        border-left-width: 16px !important;
+        border-right-width: 16px !important;
     }
 
     .plumbob-diamond:after {
-        top: 32px !important;
-        left: -19px !important;
-        border-top-width: 32px !important;
-        border-left-width: 19px !important;
-        border-right-width: 19px !important;
+        top: 28px !important;
+        left: -16px !important;
+        border-top-width: 28px !important;
+        border-left-width: 16px !important;
+        border-right-width: 16px !important;
     }
 
     .need-row {
-        margin-bottom: 18px !important;
+        margin-bottom: 15px !important;
     }
 
     .need-label {
-        font-size: 1.5rem !important;
-        margin-bottom: 8px !important;
+        font-size: 1.4rem !important;
+        margin-bottom: 6px !important;
     }
 
     .bar-container {
-        height: 30px !important; 
+        height: 26px !important; 
     }
 
     button {
-        font-size: 1.05rem !important;
-        padding: 11px 0 !important;
+        font-size: 1rem !important;
+        padding: 9px 0 !important;
     }
 
     #frenzied-feast-screen {
-        margin-bottom: 18px !important;
+        margin-bottom: 15px !important;
     }
 
     .feast-text {
-        font-size: 2.4rem !important;
+        font-size: 2.2rem !important;
     }
 }
