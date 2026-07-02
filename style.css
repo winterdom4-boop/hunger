@@ -192,57 +192,64 @@ button {
 }
 
 /* ==========================================================================
-   LANDSCAPE NAVIGATION RULES (Triggers when iPhone is turned sideways)
+   LANDSCAPE NAVIGATION RULES (Fixed squish and top margins)
    ========================================================================== */
 @media (orientation: landscape) and (max-height: 500px) {
+    body {
+        /* Switch to dynamic viewport tracking to clear mobile Safari bar margins */
+        height: 100dvh; 
+        justify-content: center;
+        padding: 0;
+    }
+
     .needs-panel {
-        padding: 15px 25px; /* Compresses internal empty space */
-        max-width: 480px;   /* Pulls width wider to match orientation */
+        padding: 20px 30px; /* Restored regular padding to fix the squished look */
+        max-width: 420px;
+        margin: auto; /* Dynamically forces the box dead center layout */
     }
 
     .plumbob-container {
-        margin-bottom: 5px; /* Moves diamond tighter to components */
-        height: 50px;
+        margin-bottom: 12px;
+        height: 60px;
     }
 
-    /* Scales diamond structure down to prevent clipping */
     .plumbob-diamond {
-        border-bottom-width: 25px;
-        border-left-width: 15px;
-        border-right-width: 15px;
+        border-bottom-width: 30px;
+        border-left-width: 18px;
+        border-right-width: 18px;
     }
 
     .plumbob-diamond:after {
-        top: 25px;
-        left: -15px;
-        border-top-width: 25px;
-        border-left-width: 15px;
-        border-right-width: 15px;
+        top: 30px;
+        left: -18px;
+        border-top-width: 30px;
+        border-left-width: 18px;
+        border-right-width: 18px;
     }
 
     .need-row {
-        margin-bottom: 12px; /* Pulls track bar line up tightly */
+        margin-bottom: 16px;
     }
 
     .need-label {
-        font-size: 1.3rem;
-        margin-bottom: 4px;
+        font-size: 1.5rem;
+        margin-bottom: 6px;
     }
 
     .bar-container {
-        height: 24px; /* Slightly sleeker health meter bar profile */
+        height: 28px; /* Slightly larger bar track profile for clarity */
     }
 
     button {
-        font-size: 0.95rem;
-        padding: 8px 0; /* Slims down execution buttons */
+        font-size: 1rem;
+        padding: 10px 0;
     }
 
     #frenzied-feast-screen {
-        margin-bottom: 10px;
+        margin-bottom: 15px;
     }
 
     .feast-text {
-        font-size: 2rem; /* Shrinks end state warnings so they don't break lines */
+        font-size: 2.2rem;
     }
 }
