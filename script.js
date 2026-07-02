@@ -7,7 +7,7 @@ const bodyElement = document.getElementById('app-body');
 const uiPanel = document.getElementById('ui-panel');
 const hungerLabel = document.getElementById('hunger-label');
 const hungerBar = document.getElementById('hunger-bar');
-const plumbob = document.getElementById('plumbob');
+const plumbob = document.getElementById('plumbob-diamond');
 const playPauseBtn = document.getElementById('play-pause-btn');
 const feastScreen = document.getElementById('frenzied-feast-screen');
 const alarmSound = document.getElementById('alarm-sound');
@@ -30,7 +30,6 @@ function updateUI() {
 }
 
 function startInterval() {
-    // Shared core function to launch a fresh running timer loop
     playPauseBtn.textContent = "Pause";
     plumbob.classList.remove("paused");
     plumbob.classList.add("spinning");
@@ -57,24 +56,27 @@ function toggleTimer() {
 }
 
 function feedSim() {
-    // 1. Force clear any active interval loop immediately
     clearInterval(timerId);
     timerId = null;
-    
-    // 2. Refill the time parameter to full
     timeLeft = TOTAL_TIME;
     
-    // 3. Wipe out all visual game-over Feast elements and audio cues
+    playPauseBtn.textContent = "Play";
+    
+    // Reset all design changes back to default Sims 2 periwinkle styles
     alarmSound.pause();
     alarmSound.currentTime = 0;
     bodyElement.style.backgroundColor = "#8fa1e0";
     uiPanel.classList.remove("feast-mode");
-    hungerLabel.classList.remove("feast-mode-text");
+    
+    // Restore the Hunger text and default green Plumbob color state
+    hungerLabel.classList.remove("hide-label");
+    plumbob.classList.remove("state-plumbob-red");
+    
     feastScreen.classList.add("hidden");
     
     updateUI();
     
-    // 4. FIX: Instantly force start the timer loop running forward seamlessly
+    // Automatically start the countdown loop again
     startInterval();
 }
 
@@ -98,15 +100,21 @@ function triggerFeast() {
     clearInterval(timerId);
     timerId = null;
     playPauseBtn.textContent = "Play";
-    plumbob.classList.add("paused");
     
-    // Forces dark red screen background
+    // FIX: Forces the Plumbob to explicitly stay spinning during Feast Mode
+    plumbob.classList.remove("paused");
+    plumbob.classList.add("spinning");
+    
+    // Force background to dark red
     bodyElement.style.setProperty('background-color', '#660000', 'important'); 
     
-    // Switches on dark grey panel box override styles
+    // Activate Feast mode dark grey panel styles
     uiPanel.classList.add("feast-mode");
-    hungerLabel.classList.add("feast-mode-text");
     feastScreen.classList.remove("hidden");
+    
+    // FIX: Hides the Hunger text block and forces the Plumbob to turn red
+    hungerLabel.classList.add("hide-label");
+    plumbob.classList.add("state-plumbob-red");
 
     if (!isMuted) {
         alarmSound.play().catch(error => console.log("Audio waiting for user click."));
