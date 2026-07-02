@@ -12,7 +12,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100dvh; /* Tracks real screen space, avoiding Safari bars */
+    height: 100vh;
     width: 100vw;
     overflow: hidden;
     transition: background-color 0.5s ease;
@@ -192,73 +192,67 @@ button {
 }
 
 /* ==========================================================================
-   LANDSCAPE NAVIGATION RULES (Fixed layout using Dynamic Heights)
+   RESTORED PERFECT LANDSCAPE OVERRIDES (With Touch-Target Fixes)
    ========================================================================== */
 @media (orientation: landscape) and (max-height: 500px) {
-    body {
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        height: 100dvh !important; /* Locks screen height strictly to true space */
-        width: 100vw !important;
-    }
-
     .needs-panel {
-        position: relative !important;
-        top: auto !important;
-        left: auto !important;
-        transform: none !important;
+        /* Restored original perfect coordinate centering layout */
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
         
-        /* Compact layout geometry to fit within the shorter space */
-        padding: 15px 25px !important;
-        width: 90% !important;
-        max-width: 440px !important;
+        /* FIX: Forces touch boxes to snap directly to the visual layer */
+        transform-style: preserve-3d !important; 
+        
+        /* Proportions */
+        padding: 25px 30px !important;
+        width: 85% !important;
+        max-width: 410px !important;
     }
 
     .plumbob-container {
-        margin-bottom: 5px !important;
-        height: 45px !important;
+        margin-bottom: 12px !important;
+        height: 65px !important;
     }
 
-    /* Scales down diamond dimensions safely */
     .plumbob-diamond {
-        border-bottom-width: 22px !important;
-        border-left-width: 12px !important;
-        border-right-width: 12px !important;
+        border-bottom-width: 32px !important;
+        border-left-width: 19px !important;
+        border-right-width: 19px !important;
     }
 
     .plumbob-diamond:after {
-        top: 22px !important;
-        left: -12px !important;
-        border-top-width: 22px !important;
-        border-left-width: 12px !important;
-        border-right-width: 12px !important;
+        top: 32px !important;
+        left: -19px !important;
+        border-top-width: 32px !important;
+        border-left-width: 19px !important;
+        border-right-width: 19px !important;
     }
 
     .need-row {
-        margin-bottom: 10px !important;
+        margin-bottom: 18px !important;
     }
 
     .need-label {
-        font-size: 1.2rem !important;
-        margin-bottom: 2px !important;
+        font-size: 1.5rem !important;
+        margin-bottom: 8px !important;
     }
 
     .bar-container {
-        height: 22px !important; 
+        height: 30px !important; 
     }
 
     button {
-        font-size: 0.95rem !important;
-        padding: 8px 0 !important;
+        font-size: 1.05rem !important;
+        padding: 11px 0 !important;
     }
 
     #frenzied-feast-screen {
-        margin-bottom: 10px !important;
+        margin-bottom: 18px !important;
     }
 
     .feast-text {
-        font-size: 1.8rem !important;
+        font-size: 2.4rem !important;
     }
 }
