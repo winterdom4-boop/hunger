@@ -1,89 +1,111 @@
-const TOTAL_TIME = 1800; // 30 minutes in seconds
-let timeLeft = TOTAL_TIME;
-let timerId = null;
-let isMuted = false;
-
-const bodyElement = document.getElementById('app-body');
-const uiPanel = document.getElementById('ui-panel');
-const hungerBar = document.getElementById('hunger-bar');
-const playPauseBtn = document.getElementById('play-pause-btn');
-const feastScreen = document.getElementById('frenzied-feast-screen');
-const alarmSound = document.getElementById('alarm-sound');
-
-function updateUI() {
-    let percentage = (timeLeft / TOTAL_TIME) * 100;
-    hungerBar.style.width = `${percentage}%`;
-
-    // Strip previous color classes
-    hungerBar.className = "bar-fill";
-
-    // Dynamic Sims health bar color mapping
-    if (percentage > 60) {
-        hungerBar.classList.add("state-green");
-    } else if (percentage > 35) {
-        hungerBar.classList.add("state-yellow");
-    } else if (percentage > 15) {
-        hungerBar.classList.add("state-orange");
-    } else {
-        hungerBar.classList.add("state-red");
-    }
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    margin: 0;
+    padding: 0;
 }
 
-function toggleTimer() {
-    if (timerId === null) {
-        // Start playing
-        playPauseBtn.textContent = "Pause";
-        timerId = setInterval(() => {
-            if (timeLeft > 0) {
-                timeLeft--;
-                updateUI();
-            } else {
-                triggerFeast();
-            }
-        }, 1000);
-    } else {
-        // Pause active timer
-        clearInterval(timerId);
-        timerId = null;
-        playPauseBtn.textContent = "Play";
-    }
+body {
+    background-color: #8fa1e0 !important; /* Forces the iconic periwinkle blue */
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
 }
 
-function feedSim() {
-    clearInterval(timerId);
-    timerId = null;
-    timeLeft = TOTAL_TIME;
-    playPauseBtn.textContent = "Play";
-    
-    // Reverse all end-game states back to normal
-    alarmSound.pause();
-    alarmSound.currentTime = 0;
-    bodyElement.style.backgroundColor = "#8fa1e0";
-    uiPanel.classList.remove("hidden");
-    feastScreen.classList.add("hidden");
-    
-    updateUI();
+/* The Sims 2 HUD Panel Box */
+.needs-panel {
+    background: #8fa1e0; 
+    background-image: linear-gradient(to bottom, #9cb3f2, #7a8ed9);
+    border: 3px solid #5869a8;
+    border-radius: 20px;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    display: block !important;
 }
 
-function toggleMute() {
-    isMuted = !isMuted;
-    alarmSound.muted = isMuted;
-    document.getElementById('mute-btn').textContent = isMuted ? "Unmute" : "Mute";
+.need-row {
+    margin-bottom: 25px;
 }
 
-function triggerFeast() {
-    clearInterval(timerId);
-    timerId = null;
-    
-    // Hide panel, transition background color to deep red, show textual alert
-    uiPanel.classList.add("hidden");
-    bodyElement.style.backgroundColor = "#660000"; 
-    feastScreen.classList.remove("hidden");
-
-    if (!isMuted) {
-        alarmSound.play().catch(error => console.log("Audio waiting for user click interaction."));
-    }
+/* Dark Navy Text Style */
+.need-label {
+    display: block;
+    color: #1a2a60;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 12px;
 }
 
-// Set up the green bar right away when the app fires up
-updateUI();
+/* Outer Grooved Track for the Bar */
+.bar-container {
+    background-color: #404040;
+    border: 2px solid #202020;
+    border-radius: 50px;
+    height: 32px;
+    width: 100%;
+    padding: 2px;
+    overflow: hidden;
+}
+
+/* Capsule Bar Fill */
+.bar-fill {
+    height: 100%;
+    width: 100%; /* Spans 100% on start */
+    border-radius: 50px;
+}
+
+/* Color States fallback */
+.state-green  { background: #009900 !important; }
+.state-yellow { background: #cccc00 !important; }
+.state-orange { background: #e65c00 !important; }
+.state-red    { background: #990000 !important; }
+
+/* Buttons */
+.control-panel {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+button {
+    flex: 1;
+    background: #ffffff;
+    border: 2px solid #5869a8;
+    color: #1a2a60;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 12px 0;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+/* End Game Hidden States */
+.hidden {
+    display: none !important;
+}
+
+#frenzied-feast-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.feast-text {
+    color: #ffffff;
+    font-size: 3.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-shadow: 4px 4px 0px #000000;
+}
