@@ -192,64 +192,64 @@ button {
 }
 
 /* ==========================================================================
-   LANDSCAPE NAVIGATION RULES (Fixed squish and top margins)
+   FIXED LANDSCAPE NAVIGATION RULES (Forced Center Overlay)
    ========================================================================== */
 @media (orientation: landscape) and (max-height: 500px) {
-    body {
-        /* Switch to dynamic viewport tracking to clear mobile Safari bar margins */
-        height: 100dvh; 
-        justify-content: center;
-        padding: 0;
-    }
-
     .needs-panel {
-        padding: 20px 30px; /* Restored regular padding to fix the squished look */
-        max-width: 420px;
-        margin: auto; /* Dynamically forces the box dead center layout */
+        /* Bypasses flex alignment calculations entirely */
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        
+        /* Restores natural un-squished dimensional proportions */
+        padding: 25px 30px !important;
+        width: 85% !important;
+        max-width: 410px !important;
     }
 
     .plumbob-container {
-        margin-bottom: 12px;
-        height: 60px;
+        margin-bottom: 12px !important;
+        height: 65px !important;
     }
 
     .plumbob-diamond {
-        border-bottom-width: 30px;
-        border-left-width: 18px;
-        border-right-width: 18px;
+        border-bottom-width: 32px !important;
+        border-left-width: 19px !important;
+        border-right-width: 19px !important;
     }
 
     .plumbob-diamond:after {
-        top: 30px;
-        left: -18px;
-        border-top-width: 30px;
-        border-left-width: 18px;
-        border-right-width: 18px;
+        top: 32px !important;
+        left: -19px !important;
+        border-top-width: 32px !important;
+        border-left-width: 19px !important;
+        border-right-width: 19px !important;
     }
 
     .need-row {
-        margin-bottom: 16px;
+        margin-bottom: 18px !important;
     }
 
     .need-label {
-        font-size: 1.5rem;
-        margin-bottom: 6px;
+        font-size: 1.5rem !important;
+        margin-bottom: 8px !important;
     }
 
     .bar-container {
-        height: 28px; /* Slightly larger bar track profile for clarity */
+        height: 30px !important; 
     }
 
     button {
-        font-size: 1rem;
-        padding: 10px 0;
+        font-size: 1.05rem !important;
+        padding: 11px 0 !important;
     }
 
     #frenzied-feast-screen {
-        margin-bottom: 15px;
+        margin-bottom: 18px !important;
     }
 
     .feast-text {
-        font-size: 2.2rem;
+        font-size: 2.4rem !important;
     }
 }
