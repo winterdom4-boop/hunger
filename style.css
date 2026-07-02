@@ -15,10 +15,10 @@ body {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-    transition: background-color 0.5s ease; /* Enables quick screen color transitions */
+    transition: background-color 0.5s ease;
 }
 
-/* The Sims 2 HUD Panel Box */
+/* Default Sims 2 HUD Panel Box */
 .needs-panel {
     background: #8fa1e0; 
     background-image: linear-gradient(to bottom, #9cb3f2, #7a8ed9);
@@ -30,9 +30,17 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     text-align: center;
     position: relative;
+    transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-/* Plumbob Placement Container */
+/* NEW: Active Feast Mode override rules for the panel box */
+.needs-panel.feast-mode {
+    background: rgb(30, 30, 30) !important;
+    background-image: none !important;
+    border-color: #ff3333 !important;
+    box-shadow: 0 8px 24px rgba(255, 0, 0, 0.3);
+}
+
 .plumbob-container {
     display: flex;
     justify-content: center;
@@ -41,7 +49,6 @@ body {
     height: 70px;
 }
 
-/* Restored Original 2D Flat Plumbob */
 .plumbob-diamond {
     width: 0;
     height: 0;
@@ -64,7 +71,6 @@ body {
     border-top: 35px solid #47b847;
 }
 
-/* 2D Flat Rotation rules */
 .spinning {
     animation: spinPlumbob 2.5s linear infinite;
 }
@@ -89,6 +95,13 @@ body {
     font-weight: 700;
     margin-bottom: 12px;
     text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.3);
+    transition: color 0.3s ease;
+}
+
+/* NEW: Feast Mode label color switch */
+.need-label.feast-mode-text {
+    color: #ff3333 !important;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.8) !important;
 }
 
 .bar-container {
@@ -135,20 +148,20 @@ button {
     display: none !important;
 }
 
-/* Feast Mode text box formatting */
 #frenzied-feast-screen {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
+/* NEW: Enlarged text formatting over 2 separate lines */
 .feast-text {
-    color: #ffffff;
-    font-size: 2.2rem;
+    color: #ff3333; /* Bright Red */
+    font-size: 2.8rem; /* Scaled larger */
     font-weight: 900;
     text-transform: uppercase;
+    line-height: 1.1; /* Keeps line height tight and look good */
     text-shadow: 3px 3px 0px #000000;
 }
 
-/* Secret Test Button Footer configuration */
 #secret-test-btn {
     position: absolute;
     bottom: 0;
