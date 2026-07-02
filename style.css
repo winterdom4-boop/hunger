@@ -12,7 +12,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100dvh; /* Tracks real screen space, avoiding Safari bars */
     width: 100vw;
     overflow: hidden;
     transition: background-color 0.5s ease;
@@ -192,71 +192,73 @@ button {
 }
 
 /* ==========================================================================
-   UPDATED LANDSCAPE RULES (Fixes the offset clickboxes)
+   LANDSCAPE NAVIGATION RULES (Fixed layout using Dynamic Heights)
    ========================================================================== */
 @media (orientation: landscape) and (max-height: 500px) {
     body {
-        display: grid !important;
-        place-items: center !important;
-        height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        height: 100dvh !important; /* Locks screen height strictly to true space */
         width: 100vw !important;
     }
 
     .needs-panel {
-        /* Reset positioning back to a natural flow layout */
         position: relative !important;
         top: auto !important;
         left: auto !important;
         transform: none !important;
         
-        /* Layout dimensions */
-        padding: 20px 30px !important;
-        width: 95% !important;
-        max-width: 400px !important;
+        /* Compact layout geometry to fit within the shorter space */
+        padding: 15px 25px !important;
+        width: 90% !important;
+        max-width: 440px !important;
     }
 
     .plumbob-container {
-        margin-bottom: 10px !important;
-        height: 55px !important;
+        margin-bottom: 5px !important;
+        height: 45px !important;
     }
 
+    /* Scales down diamond dimensions safely */
     .plumbob-diamond {
-        border-bottom-width: 28px !important;
-        border-left-width: 16px !important;
-        border-right-width: 16px !important;
+        border-bottom-width: 22px !important;
+        border-left-width: 12px !important;
+        border-right-width: 12px !important;
     }
 
     .plumbob-diamond:after {
-        top: 28px !important;
-        left: -16px !important;
-        border-top-width: 28px !important;
-        border-left-width: 16px !important;
-        border-right-width: 16px !important;
+        top: 22px !important;
+        left: -12px !important;
+        border-top-width: 22px !important;
+        border-left-width: 12px !important;
+        border-right-width: 12px !important;
     }
 
     .need-row {
-        margin-bottom: 15px !important;
+        margin-bottom: 10px !important;
     }
 
     .need-label {
-        font-size: 1.4rem !important;
-        margin-bottom: 6px !important;
+        font-size: 1.2rem !important;
+        margin-bottom: 2px !important;
     }
 
     .bar-container {
-        height: 26px !important; 
+        height: 22px !important; 
     }
 
     button {
-        font-size: 1rem !important;
-        padding: 9px 0 !important;
+        font-size: 0.95rem !important;
+        padding: 8px 0 !important;
     }
 
     #frenzied-feast-screen {
-        margin-bottom: 15px !important;
+        margin-bottom: 10px !important;
     }
 
     .feast-text {
-        font-size: 2.2rem !important;
+        font-size: 1.8rem !important;
     }
 }
