@@ -72,7 +72,7 @@ body {
     border-top: 35px solid #47b847;
 }
 
-/* NEW: Active Feast Mode Red Plumbob color swap overrides */
+/* Active Feast Mode Red Plumbob color swap overrides */
 .plumbob-diamond.state-plumbob-red {
     border-bottom-color: #ff3333 !important;
     filter: drop-shadow(0 0 8px rgba(255, 51, 51, 0.7)) !important;
@@ -108,7 +108,6 @@ body {
     text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.3);
 }
 
-/* NEW: Completely hides the Hunger text block during Feast Mode */
 .hide-label {
     display: none !important;
 }
@@ -190,4 +189,60 @@ button {
     text-align: center;
     line-height: 60px;
     opacity: 0.1;
+}
+
+/* ==========================================================================
+   LANDSCAPE NAVIGATION RULES (Triggers when iPhone is turned sideways)
+   ========================================================================== */
+@media (orientation: landscape) and (max-height: 500px) {
+    .needs-panel {
+        padding: 15px 25px; /* Compresses internal empty space */
+        max-width: 480px;   /* Pulls width wider to match orientation */
+    }
+
+    .plumbob-container {
+        margin-bottom: 5px; /* Moves diamond tighter to components */
+        height: 50px;
+    }
+
+    /* Scales diamond structure down to prevent clipping */
+    .plumbob-diamond {
+        border-bottom-width: 25px;
+        border-left-width: 15px;
+        border-right-width: 15px;
+    }
+
+    .plumbob-diamond:after {
+        top: 25px;
+        left: -15px;
+        border-top-width: 25px;
+        border-left-width: 15px;
+        border-right-width: 15px;
+    }
+
+    .need-row {
+        margin-bottom: 12px; /* Pulls track bar line up tightly */
+    }
+
+    .need-label {
+        font-size: 1.3rem;
+        margin-bottom: 4px;
+    }
+
+    .bar-container {
+        height: 24px; /* Slightly sleeker health meter bar profile */
+    }
+
+    button {
+        font-size: 0.95rem;
+        padding: 8px 0; /* Slims down execution buttons */
+    }
+
+    #frenzied-feast-screen {
+        margin-bottom: 10px;
+    }
+
+    .feast-text {
+        font-size: 2rem; /* Shrinks end state warnings so they don't break lines */
+    }
 }
