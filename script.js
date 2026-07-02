@@ -4,6 +4,8 @@ let timerId = null;
 let isMuted = false;
 
 const bodyElement = document.getElementById('app-body');
+const uiPanel = document.getElementById('ui-panel');
+const hungerLabel = document.getElementById('hunger-label');
 const hungerBar = document.getElementById('hunger-bar');
 const plumbob = document.getElementById('plumbob');
 const playPauseBtn = document.getElementById('play-pause-btn');
@@ -29,6 +31,7 @@ function updateUI() {
 
 function toggleTimer() {
     if (timerId === null) {
+        // Start running
         playPauseBtn.textContent = "Pause";
         plumbob.classList.remove("paused");
 
@@ -41,6 +44,7 @@ function toggleTimer() {
             }
         }, 1000);
     } else {
+        // Pause active timer
         clearInterval(timerId);
         timerId = null;
         playPauseBtn.textContent = "Play";
@@ -49,19 +53,25 @@ function toggleTimer() {
 }
 
 function feedSim() {
+    // 1. Reset active interval loops completely
     clearInterval(timerId);
     timerId = null;
+    
+    // 2. Set variables back to max settings
     timeLeft = TOTAL_TIME;
     
-    playPauseBtn.textContent = "Play";
-    plumbob.classList.add("paused");
-    
+    // 3. Reset all design elements back to classic periwinkle styles
     alarmSound.pause();
     alarmSound.currentTime = 0;
-    bodyElement.style.backgroundColor = "#8fa1e0"; // Reset back to periwinkle
+    bodyElement.style.backgroundColor = "#8fa1e0";
+    uiPanel.classList.remove("feast-mode");
+    hungerLabel.classList.remove("feast-mode-text");
     feastScreen.classList.add("hidden");
     
     updateUI();
+    
+    // 4. Force start the timer automatically so it runs down instantly
+    toggleTimer();
 }
 
 function toggleMute() {
@@ -86,11 +96,17 @@ function triggerFeast() {
     playPauseBtn.textContent = "Play";
     plumbob.classList.add("paused");
     
-    bodyElement.style.setProperty('background-color', '#660000', 'important'); // Forces the background to dark red
+    // 1. Force background to dark red
+    bodyElement.style.setProperty('background-color', '#660000', 'important'); 
+    
+    // 2. Activate Feast mode dark grey panel styles and text colors
+    uiPanel.classList.add("feast-mode");
+    hungerLabel.classList.add("feast-mode-text");
     feastScreen.classList.remove("hidden");
 
+    // 3. Play sound track strictly once
     if (!isMuted) {
-        alarmSound.play().catch(error => console.log("Audio waiting for user click."));
+        alarmSound.play().catch(error => console.log("Audio waiting for user context."));
     }
 }
 
