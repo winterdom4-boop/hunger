@@ -18,7 +18,7 @@ body {
     transition: background-color 0.5s ease;
 }
 
-/* Default Sims 2 HUD Panel Box */
+/* The Sims 2 HUD Panel Box */
 .needs-panel {
     background: #8fa1e0; 
     background-image: linear-gradient(to bottom, #9cb3f2, #7a8ed9);
@@ -192,20 +192,14 @@ button {
 }
 
 /* ==========================================================================
-   RESTORED PERFECT LANDSCAPE OVERRIDES (With Touch-Target Fixes)
+   RESTORED LANDSCAPE OVERRIDES (The Exact Perfect Visual Version)
    ========================================================================== */
 @media (orientation: landscape) and (max-height: 500px) {
     .needs-panel {
-        /* Restored original perfect coordinate centering layout */
         position: fixed !important;
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
-        
-        /* FIX: Forces touch boxes to snap directly to the visual layer */
-        transform-style: preserve-3d !important; 
-        
-        /* Proportions */
         padding: 25px 30px !important;
         width: 85% !important;
         max-width: 410px !important;
