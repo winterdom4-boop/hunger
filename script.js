@@ -29,22 +29,26 @@ function updateUI() {
     }
 }
 
+function startInterval() {
+    // Shared core function to launch a fresh running timer loop
+    playPauseBtn.textContent = "Pause";
+    plumbob.classList.remove("paused");
+    plumbob.classList.add("spinning");
+
+    timerId = setInterval(() => {
+        if (timeLeft > 0) {
+            timeLeft--;
+            updateUI();
+        } else {
+            triggerFeast();
+        }
+    }, 1000);
+}
+
 function toggleTimer() {
     if (timerId === null) {
-        // Start running
-        playPauseBtn.textContent = "Pause";
-        plumbob.classList.remove("paused");
-
-        timerId = setInterval(() => {
-            if (timeLeft > 0) {
-                timeLeft--;
-                updateUI();
-            } else {
-                triggerFeast();
-            }
-        }, 1000);
+        startInterval();
     } else {
-        // Pause active timer
         clearInterval(timerId);
         timerId = null;
         playPauseBtn.textContent = "Play";
@@ -53,14 +57,14 @@ function toggleTimer() {
 }
 
 function feedSim() {
-    // 1. Reset active interval loops completely
+    // 1. Force clear any active interval loop immediately
     clearInterval(timerId);
     timerId = null;
     
-    // 2. Set variables back to max settings
+    // 2. Refill the time parameter to full
     timeLeft = TOTAL_TIME;
     
-    // 3. Reset all design elements back to classic periwinkle styles
+    // 3. Wipe out all visual game-over Feast elements and audio cues
     alarmSound.pause();
     alarmSound.currentTime = 0;
     bodyElement.style.backgroundColor = "#8fa1e0";
@@ -70,8 +74,8 @@ function feedSim() {
     
     updateUI();
     
-    // 4. Force start the timer automatically so it runs down instantly
-    toggleTimer();
+    // 4. FIX: Instantly force start the timer loop running forward seamlessly
+    startInterval();
 }
 
 function toggleMute() {
@@ -87,7 +91,7 @@ function triggerSecretTest() {
     timeLeft = 3;
     updateUI();
     
-    toggleTimer();
+    startInterval();
 }
 
 function triggerFeast() {
@@ -96,17 +100,16 @@ function triggerFeast() {
     playPauseBtn.textContent = "Play";
     plumbob.classList.add("paused");
     
-    // 1. Force background to dark red
+    // Forces dark red screen background
     bodyElement.style.setProperty('background-color', '#660000', 'important'); 
     
-    // 2. Activate Feast mode dark grey panel styles and text colors
+    // Switches on dark grey panel box override styles
     uiPanel.classList.add("feast-mode");
     hungerLabel.classList.add("feast-mode-text");
     feastScreen.classList.remove("hidden");
 
-    // 3. Play sound track strictly once
     if (!isMuted) {
-        alarmSound.play().catch(error => console.log("Audio waiting for user context."));
+        alarmSound.play().catch(error => console.log("Audio waiting for user click."));
     }
 }
 
