@@ -1,4 +1,4 @@
-const TOTAL_TIME = 1800; // 30 minutes in seconds
+const TOTAL_TIME = 7200; // 120 minutes in seconds
 let timeLeft = TOTAL_TIME;
 let timerId = null;
 let isMuted = false;
